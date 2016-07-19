@@ -14,7 +14,7 @@ import se.dennisvonbargen.openlogger.sensor.PressureSensor;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int intervalMillis = 250;
+    private static final int intervalMillis = 1000;
     private Handler timerHandler;
     private Runnable timerRunnable;
     private SensorManager sensorManager;
@@ -23,14 +23,12 @@ public class MainActivity extends AppCompatActivity {
     private float pressure = -1f;
     private float basePressure = -1f;
 
-    private Locale locale;
+    private Locale locale = Locale.US;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        locale = Locale.US;
-
         { // Get pressure sensor
             sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
             pressureSensor = new PressureSensor(sensorManager);
