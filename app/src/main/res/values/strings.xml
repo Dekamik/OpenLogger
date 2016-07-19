@@ -2,9 +2,8 @@
     <string name="app_name">OpenLogger</string>
 
     <!-- Labels -->
+    <string name="str_lbl_base_pressure">Base Pressure</string>
+    <string name="str_lbl_base_pressure_hint">Type pressure in hPa</string>
     <string name="str_lbl_pressure">Pressure</string>
-    <string name="str_lbl_temperature">Temperature</string>
-
-    <string name="suf_unit_hpa"> hPa</string>
-    <string name="suf_unit_celsius">°C</string>
+    <string name="str_lbl_altitude">Altitude</string>
 </resources>
