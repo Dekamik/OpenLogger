@@ -8,4 +8,5 @@
     <string name="str_lbl_altitude">Altitude</string>
     <string name="str_lbl_latitude">Latitude</string>
     <string name="str_lbl_longitude">Longitude</string>
+    <string name="str_lbl_speed">Speed</string>
 </resources>

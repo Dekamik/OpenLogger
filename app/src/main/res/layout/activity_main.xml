@@ -118,5 +118,24 @@
                 android:layout_column="1" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/str_lbl_speed"
+                android:id="@+id/lbl_speed"
+                android:layout_column="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=": 0 km/h"
+                android:id="@+id/speed"
+                android:layout_column="1" />
+        </TableRow>
+
     </TableLayout>
 </RelativeLayout>

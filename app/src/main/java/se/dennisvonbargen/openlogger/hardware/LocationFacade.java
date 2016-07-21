@@ -14,6 +14,7 @@ public class LocationFacade implements HardwareFacade, LocationListener {
 
     private double latitude;
     private double longitude;
+    private float speed;
     private LocationManager locationManager;
 
     public LocationFacade(LocationManager locationManager) {
@@ -46,6 +47,7 @@ public class LocationFacade implements HardwareFacade, LocationListener {
     public void onLocationChanged(Location location) {
         latitude = location.getLatitude();
         longitude = location.getLongitude();
+        speed = location.getSpeed();
     }
 
     @Override
@@ -63,11 +65,12 @@ public class LocationFacade implements HardwareFacade, LocationListener {
 
     }
 
-    public double getLongitude() {
-        return longitude;
-    }
+    public double getLongitude() { return longitude; }
 
-    public double getLatitude() {
-        return latitude;
-    }
+    public double getLatitude() { return latitude; }
+
+    /** @return speed in meters per second */
+    public float getSpeed() { return speed; }
+
+    public float getSpeedKmh() { return 3.6f * getSpeed(); }
 }

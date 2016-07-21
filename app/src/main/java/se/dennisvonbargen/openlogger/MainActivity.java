@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
 
     private double latitude = 0;
     private double longitude = 0;
+    private float speed = 0;
     private float pressure = -1f;
     private float basePressure = -1f;
 
@@ -50,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
                     pressure = pressureFacade.getPressure();
                     latitude = locationFacade.getLatitude();
                     longitude = locationFacade.getLongitude();
+                    speed = locationFacade.getSpeedKmh();
                     userInput();
                     updateGUI();
                     timerHandler.postDelayed(this, intervalMillis);
@@ -90,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void updateGUI() {
-        { // Pressure and Altimeter
+        { // Pressure and altimeter
             TextView pressureText = (TextView) findViewById(R.id.pressure);
             TextView altitudeText = (TextView) findViewById(R.id.altitude);
 
@@ -100,15 +102,19 @@ public class MainActivity extends AppCompatActivity {
             final String newAltitude = String.format(locale, ": %d m", (int) SensorManager.getAltitude(basePressure, pressure));
             altitudeText.setText(newAltitude);
         }
-        { // Location
+        { // Location and speed
             TextView latitudeText = (TextView) findViewById(R.id.latitude);
             TextView longitudeText = (TextView) findViewById(R.id.longitude);
+            TextView speedText = (TextView) findViewById(R.id.speed);
 
             final String newLatitude = String.format(locale, ": %f", latitude);
             latitudeText.setText(newLatitude);
 
             final String newLongitude = String.format(locale, ": %f", longitude);
             longitudeText.setText(newLongitude);
+
+            final String newSpeed = String.format(locale, ": %.2f km/h", speed);
+            speedText.setText(newSpeed);
         }
     }
 }
