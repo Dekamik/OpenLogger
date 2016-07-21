@@ -55,7 +55,8 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/pressure"
-                android:layout_column="1" />
+                android:layout_column="1"
+                android:text=": 0 hPa" />
         </TableRow>
 
         <TableRow
@@ -75,6 +76,45 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:id="@+id/altitude"
+                android:layout_column="1"
+                android:text=": 0 m" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/str_lbl_latitude"
+                android:id="@+id/lbl_latitude"
+                android:layout_column="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=": 0"
+                android:id="@+id/latitude"
+                android:layout_column="1" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/str_lbl_longitude"
+                android:id="@+id/lbl_longitude"
+                android:layout_column="0" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=": 0"
+                android:id="@+id/longitude"
                 android:layout_column="1" />
         </TableRow>
 

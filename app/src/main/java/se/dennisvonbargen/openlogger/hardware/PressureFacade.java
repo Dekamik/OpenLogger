@@ -1,4 +1,4 @@
-package se.dennisvonbargen.openlogger.sensor;
+package se.dennisvonbargen.openlogger.hardware;
 
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,16 +10,26 @@ import android.hardware.SensorManager;
  *
  * @author Dennis von Bargen
  */
-public class PressureSensor implements SensorEventListener {
+public class PressureFacade implements HardwareFacade, SensorEventListener {
 
     private float pressure;
     private SensorManager sensorManager;
     private Sensor pressureSensor;
 
-    public PressureSensor(SensorManager sensorManager) {
+    public PressureFacade(SensorManager sensorManager) {
         pressure = -1f;
         this.sensorManager = sensorManager;
         pressureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);
+    }
+
+    @Override
+    public void enable() {
+        sensorManager.registerListener(this, pressureSensor, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    public void disable() {
+        sensorManager.unregisterListener(this);
     }
 
     @Override
@@ -28,17 +38,7 @@ public class PressureSensor implements SensorEventListener {
     }
 
     @Override
-    public void onAccuracyChanged(Sensor sensor, int i) {
-
-    }
-
-    public void enable() {
-        sensorManager.registerListener(this, pressureSensor, SensorManager.SENSOR_DELAY_NORMAL);
-    }
-
-    public void disable() {
-        sensorManager.unregisterListener(this);
-    }
+    public void onAccuracyChanged(Sensor sensor, int i) {}
 
     public float getPressure() {
         return pressure;

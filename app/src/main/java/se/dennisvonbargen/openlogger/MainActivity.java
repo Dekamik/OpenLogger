@@ -2,6 +2,7 @@ package se.dennisvonbargen.openlogger;
 
 import android.content.Context;
 import android.hardware.SensorManager;
+import android.location.LocationManager;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,16 +11,22 @@ import android.widget.TextView;
 
 import java.util.Locale;
 
-import se.dennisvonbargen.openlogger.sensor.PressureSensor;
+import se.dennisvonbargen.openlogger.hardware.LocationFacade;
+import se.dennisvonbargen.openlogger.hardware.PressureFacade;
 
 public class MainActivity extends AppCompatActivity {
 
     private static final int intervalMillis = 1000;
     private Handler timerHandler;
     private Runnable timerRunnable;
-    private SensorManager sensorManager;
-    private PressureSensor pressureSensor;
 
+    private SensorManager sensorManager;
+    private PressureFacade pressureFacade;
+    private LocationManager locationManager;
+    private LocationFacade locationFacade;
+
+    private double latitude = 0;
+    private double longitude = 0;
     private float pressure = -1f;
     private float basePressure = -1f;
 
@@ -29,17 +36,21 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        { // Get pressure sensor
+        { // Create hardware facades
             sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-            pressureSensor = new PressureSensor(sensorManager);
+            pressureFacade = new PressureFacade(sensorManager);
+            locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            locationFacade = new LocationFacade(locationManager);
         }
         { // Create update logic
             timerHandler = new Handler();
             timerRunnable = new Runnable() {
                 @Override
                 public void run() {
-                    pressure = pressureSensor.getPressure();
-                    input();
+                    pressure = pressureFacade.getPressure();
+                    latitude = locationFacade.getLatitude();
+                    longitude = locationFacade.getLongitude();
+                    userInput();
                     updateGUI();
                     timerHandler.postDelayed(this, intervalMillis);
                 }
@@ -50,7 +61,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        pressureSensor.enable();
+        pressureFacade.enable();
+        locationFacade.enable();
         timerHandler.postDelayed(timerRunnable, intervalMillis);
     }
 
@@ -58,10 +70,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         timerHandler.removeCallbacks(timerRunnable);
-        pressureSensor.disable();
+        pressureFacade.disable();
+        locationFacade.disable();
     }
 
-    public void input() {
+    public void userInput() {
         { // Base pressure
             EditText basePressureEdit = (EditText) findViewById(R.id.basePressure);
             if (basePressure == -1f) {
@@ -86,6 +99,16 @@ public class MainActivity extends AppCompatActivity {
 
             final String newAltitude = String.format(locale, ": %d m", (int) SensorManager.getAltitude(basePressure, pressure));
             altitudeText.setText(newAltitude);
+        }
+        { // Location
+            TextView latitudeText = (TextView) findViewById(R.id.latitude);
+            TextView longitudeText = (TextView) findViewById(R.id.longitude);
+
+            final String newLatitude = String.format(locale, ": %f", latitude);
+            latitudeText.setText(newLatitude);
+
+            final String newLongitude = String.format(locale, ": %f", longitude);
+            longitudeText.setText(newLongitude);
         }
     }
 }

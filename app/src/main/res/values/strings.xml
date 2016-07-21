@@ -6,4 +6,6 @@
     <string name="str_lbl_base_pressure_hint">Type pressure in hPa</string>
     <string name="str_lbl_pressure">Pressure</string>
     <string name="str_lbl_altitude">Altitude</string>
+    <string name="str_lbl_latitude">Latitude</string>
+    <string name="str_lbl_longitude">Longitude</string>
 </resources>
