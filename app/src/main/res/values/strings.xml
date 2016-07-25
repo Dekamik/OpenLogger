@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">OpenLogger</string>
 
+    <!-- Common -->
+    <string name="com_yes">Yes</string>
+    <string name="com_no">No</string>
+    <string name="com_ok">OK</string>
+
     <!-- Labels -->
     <string name="lbl_base_pressure">Base Pressure</string>
     <string name="lbl_base_pressure_hint">Type pressure in hPa</string>
@@ -13,4 +18,9 @@
     <!-- Buttons -->
     <string name="btn_record">Record</string>
     <string name="btn_recording">Recording&#8230;</string>
+
+    <!-- Dialogs -->
+    <string name="dia_no_permissions_quit_title">Exiting&#8230;</string>
+    <string name="dia_no_permissions_quit_text">OpenLogger cannot function without the requested
+        permissions and will now quit.</string>
 </resources>

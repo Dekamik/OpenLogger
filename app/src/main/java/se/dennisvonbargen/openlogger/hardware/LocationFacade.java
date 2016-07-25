@@ -5,6 +5,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.location.LocationProvider;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 
 /**
  *
@@ -17,7 +18,7 @@ public class LocationFacade implements HardwareFacade, LocationListener {
     private float speed;
     private LocationManager locationManager;
 
-    public LocationFacade(LocationManager locationManager) {
+    public LocationFacade(@NonNull LocationManager locationManager) {
         latitude = 0;
         longitude = 0;
         this.locationManager = locationManager;

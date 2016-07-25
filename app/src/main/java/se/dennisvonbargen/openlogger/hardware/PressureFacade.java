@@ -4,6 +4,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.support.annotation.NonNull;
 
 /**
  * Facade for pressure sensor
@@ -16,7 +17,7 @@ public class PressureFacade implements HardwareFacade, SensorEventListener {
     private SensorManager sensorManager;
     private Sensor pressureSensor;
 
-    public PressureFacade(SensorManager sensorManager) {
+    public PressureFacade(@NonNull SensorManager sensorManager) {
         pressure = -1f;
         this.sensorManager = sensorManager;
         pressureSensor = sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE);

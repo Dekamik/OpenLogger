@@ -2,6 +2,7 @@ package se.dennisvonbargen.openlogger;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.hardware.SensorManager;
 import android.location.LocationManager;
@@ -9,6 +10,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -139,12 +141,23 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ALL_PERMISSIONS) {
             for (int result : grantResults) {
                 if (PackageManager.PERMISSION_DENIED == result) {
-                    // Cannot continue
-                    pressureFacade.disable();
-                    locationFacade.disable();
-                    handler.removeCallbacks(updateRunnable);
-                    handler.removeCallbacks(loggerRunnable);
-                    finish();
+                    { // Alert and shut down
+                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                        builder.setMessage(R.string.dia_no_permissions_quit_text)
+                                .setTitle(R.string.dia_no_permissions_quit_title)
+                                .setNeutralButton(R.string.com_ok, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        pressureFacade.disable();
+                                        locationFacade.disable();
+                                        handler.removeCallbacks(updateRunnable);
+                                        handler.removeCallbacks(loggerRunnable);
+                                        finish();
+                                    }
+                                });
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                    }
                 }
             }
             pressureFacade.enable();
