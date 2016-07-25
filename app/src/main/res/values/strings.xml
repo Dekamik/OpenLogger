@@ -2,11 +2,15 @@
     <string name="app_name">OpenLogger</string>
 
     <!-- Labels -->
-    <string name="str_lbl_base_pressure">Base Pressure</string>
-    <string name="str_lbl_base_pressure_hint">Type pressure in hPa</string>
-    <string name="str_lbl_pressure">Pressure</string>
-    <string name="str_lbl_altitude">Altitude</string>
-    <string name="str_lbl_latitude">Latitude</string>
-    <string name="str_lbl_longitude">Longitude</string>
-    <string name="str_lbl_speed">Speed</string>
+    <string name="lbl_base_pressure">Base Pressure</string>
+    <string name="lbl_base_pressure_hint">Type pressure in hPa</string>
+    <string name="lbl_pressure">Pressure</string>
+    <string name="lbl_altitude">Altitude</string>
+    <string name="lbl_latitude">Latitude</string>
+    <string name="lbl_longitude">Longitude</string>
+    <string name="lbl_speed">Speed</string>
+
+    <!-- Buttons -->
+    <string name="btn_record">Record</string>
+    <string name="btn_recording">Recording&#8230;</string>
 </resources>

@@ -13,7 +13,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true">
+        android:layout_centerHorizontal="true"
+        android:id="@+id/table_data">
 
         <TableRow
             android:layout_width="match_parent"
@@ -23,7 +24,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/str_lbl_base_pressure"
+                android:text="@string/lbl_base_pressure"
                 android:id="@+id/lbl_base_pressure"
                 android:layout_column="0" />
 
@@ -34,7 +35,7 @@
                 android:ems="10"
                 android:id="@+id/basePressure"
                 android:layout_column="1"
-                android:hint="@string/str_lbl_base_pressure_hint" />
+                android:hint="@string/lbl_base_pressure_hint" />
 
         </TableRow>
 
@@ -46,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/str_lbl_pressure"
+                android:text="@string/lbl_pressure"
                 android:id="@+id/lbl_pressure"
                 android:layout_column="0" />
 
@@ -67,7 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/str_lbl_altitude"
+                android:text="@string/lbl_altitude"
                 android:id="@+id/lbl_altitude"
                 android:layout_column="0" />
 
@@ -86,7 +87,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/str_lbl_latitude"
+                android:text="@string/lbl_latitude"
                 android:id="@+id/lbl_latitude"
                 android:layout_column="0" />
 
@@ -105,7 +106,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/str_lbl_longitude"
+                android:text="@string/lbl_longitude"
                 android:id="@+id/lbl_longitude"
                 android:layout_column="0" />
 
@@ -124,7 +125,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/str_lbl_speed"
+                android:text="@string/lbl_speed"
                 android:id="@+id/lbl_speed"
                 android:layout_column="0" />
 
@@ -138,4 +139,14 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/btn_record"
+        android:id="@+id/btn_record"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" />
+
 </RelativeLayout>
