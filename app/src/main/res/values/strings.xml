@@ -23,4 +23,6 @@
     <string name="dia_no_permissions_quit_title">Exiting&#8230;</string>
     <string name="dia_no_permissions_quit_text">OpenLogger cannot function without the requested
         permissions and will now quit.</string>
+    <string name="dia_write_exception_title">Error</string>
+    <string name="dia_write_exception_text">Couldn\'t save log file</string>
 </resources>

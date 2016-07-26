@@ -10,7 +10,6 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +23,7 @@ import se.dennisvonbargen.openlogger.data.Export;
 import se.dennisvonbargen.openlogger.data.ExternalStorage;
 import se.dennisvonbargen.openlogger.data.RawFlightLog;
 import se.dennisvonbargen.openlogger.data.RawFlightLogData;
+import se.dennisvonbargen.openlogger.dialogs.Alert;
 import se.dennisvonbargen.openlogger.hardware.LocationFacade;
 import se.dennisvonbargen.openlogger.hardware.PressureFacade;
 
@@ -141,29 +141,28 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == ALL_PERMISSIONS) {
             for (int result : grantResults) {
                 if (PackageManager.PERMISSION_DENIED == result) {
-                    { // Alert and shut down
-                        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                        builder.setMessage(R.string.dia_no_permissions_quit_text)
-                                .setTitle(R.string.dia_no_permissions_quit_title)
-                                .setNeutralButton(R.string.com_ok, new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialogInterface, int i) {
-                                        pressureFacade.disable();
-                                        locationFacade.disable();
-                                        handler.removeCallbacks(updateRunnable);
-                                        handler.removeCallbacks(loggerRunnable);
-                                        finish();
-                                    }
-                                });
-                        AlertDialog dialog = builder.create();
-                        dialog.show();
-                    }
+                    Alert.getAlert(this, R.string.dia_no_permissions_quit_title,
+                            R.string.dia_no_permissions_quit_text, new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialogInterface, int i) {
+                                    finish();
+                                }
+                            }).show();
                 }
             }
             pressureFacade.enable();
             locationFacade.enable();
             handler.postDelayed(updateRunnable, updateIntervalMillis);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pressureFacade.disable();
+        locationFacade.disable();
+        handler.removeCallbacks(updateRunnable);
+        handler.removeCallbacks(loggerRunnable);
     }
 
     private void userInput() {
